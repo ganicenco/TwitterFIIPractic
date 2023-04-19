@@ -40,7 +40,7 @@ public class Post {
     @OneToMany //(mappedBy = "post")
     private Set<Likes> likes;
 
-    @OneToMany //(mappedBy = "post", cascade = ALL)
+    @OneToMany (mappedBy = "post", cascade = ALL)
     private Set<Reply> replays = new LinkedHashSet<>();
 
     @OneToMany// (mappedBy = "post")

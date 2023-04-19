@@ -19,4 +19,9 @@ public class ReplyServiceImpl implements ReplyService {
         newReply.setTimestamp(LocalDateTime.now());
         return replyRepository.save(newReply);
     }
+
+    @Override
+    public void addReply(Long postId) {
+
+    }
 }

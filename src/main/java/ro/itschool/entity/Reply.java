@@ -17,10 +17,10 @@ import static jakarta.persistence.CascadeType.ALL;
 public class Reply extends Post {
 
    // private Boolean isPublic;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "reply_id", nullable = false)
-//    private Post post;
-//
+
+    @ManyToOne
+    @JoinColumn(name = "reply_id")
+    private Post post;
+
 
 }

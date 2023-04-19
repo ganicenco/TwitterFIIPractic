@@ -25,18 +25,18 @@ public class ReplyController {
     //1. Add post reply : reply to existing posts or other replies. Able to specify if the reply
     //is public or only for the parent post’s owner
 
-//    @PostMapping(value = "/add/{postId}")
-//    public ResponseEntity<?> addReply(@RequestBody Reply newReply, @PathVariable Long postId) {
-//        Optional<Post> optionalPost = postService.findById(postId);
-//        if (optionalPost.isEmpty()) {
-//            return new ResponseEntity<>("Post with id:" + postId + " " + "not found", HttpStatus.BAD_REQUEST);
-//        } else {
-//            Post post = optionalPost.get();
-//            post.setReplays((Set<Reply>) newReply);
-//            return new ResponseEntity<>(replyService.save(newReply), HttpStatus.OK);
-//        }
-//    }
+
+    @PostMapping(value = "/add/{postId}")
+    public ResponseEntity<?> addReply(@RequestBody Reply reply, @PathVariable Long postId) {
+        Optional<Post> optionalPost = postService.findById(postId);
+        if (optionalPost.isEmpty()) {
+            return new ResponseEntity<>("Post with id:" + postId + " " + "not found", HttpStatus.BAD_REQUEST);
+        } else {
+            Post post = optionalPost.get();
+            post.setReplays(reply.getReplays());
+            return new ResponseEntity<>(replyService.save(reply), HttpStatus.OK);
+        }
+    }
 
 
-
-}
+    }
