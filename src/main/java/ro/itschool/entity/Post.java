@@ -33,7 +33,7 @@ public class Post {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime timestamp;
 
-    @ManyToOne()
+    @ManyToOne
     @JsonBackReference
     private User user;
 

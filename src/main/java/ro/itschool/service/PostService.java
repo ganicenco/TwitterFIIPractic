@@ -23,4 +23,6 @@ public interface PostService {
    List<Post> getPostWithMentions();
 
     Optional<Post> findById(Long postId);
+
+    List<Post> getMyPosts();
 }

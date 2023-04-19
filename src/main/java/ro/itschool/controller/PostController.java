@@ -10,6 +10,7 @@ import ro.itschool.entity.User;
 import ro.itschool.exceptions.UserNotFoundException;
 import ro.itschool.service.PostService;
 import ro.itschool.service.UserService;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -33,17 +34,13 @@ public class PostController {
         newPost.setUser(user);
         return new ResponseEntity<>(postService.save(newPost), HttpStatus.OK);
     }
+
     // 2. Get own posts : return all posts added by the current user;
     //works
-    @GetMapping(value = "/get-post/{userId}")
-    public ResponseEntity<?> getOwnPost(@PathVariable Long userId) throws UserNotFoundException {
-        Optional<User> optionalUser = userService.findById(userId);
-        if (optionalUser.isPresent())
-            return new ResponseEntity<>(optionalUser.get().getPosts(), HttpStatus.OK);
-        else
-            throw new UserNotFoundException("User not found.");
+    @GetMapping(value = "/get-own-posts")
+   public void getMyPosts(){
+        postService.getMyPosts();
     }
-
     // 2'.Able to filter posts newer than a timestamp
     //works
     @GetMapping(value = "/filter-timestamp")
@@ -57,7 +54,6 @@ public class PostController {
 //        public void getFeed() {
 //        postService.getPostFromFollowedUsers();
 //    }
-
 
 
     // 4. Delete post and all the likes
@@ -75,7 +71,7 @@ public class PostController {
         postService.repost(id);
     }
 
-//    6. Get mentions : return all posts in which the current user was mentioned
+    //    6. Get mentions : return all posts in which the current user was mentioned
 //    nu merge
     @GetMapping(value = "/mentions")
     public void getPostWithMentions() {

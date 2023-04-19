@@ -61,8 +61,6 @@ public class User implements UserDetails {
     )
     private List<User> followed = new ArrayList<>();
 
-    //    @ManyToMany(mappedBy = "followed", fetch = FetchType.LAZY)
-//    private List<User> following = new ArrayList<>();
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",

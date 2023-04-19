@@ -16,7 +16,7 @@ import static jakarta.persistence.CascadeType.ALL;
 @Setter
 public class Reply extends Post {
 
-    private Boolean isPublic;
+   // private Boolean isPublic;
 //
 //    @ManyToOne
 //    @JoinColumn(name = "reply_id", nullable = false)

@@ -68,7 +68,6 @@ public class UserServiceImpl implements UserService {
         Optional<User> user = userRepository.findById(id);
         user.ifPresent(user1 -> {
             userRepository.deleteFollower(id);
-            postRepository.deleteByUserId(user1.getId());
             userRepository.deleteById(id);
         });
     }
