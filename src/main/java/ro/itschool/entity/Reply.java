@@ -14,13 +14,13 @@ import static jakarta.persistence.CascadeType.ALL;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Reply extends Post {
 
-   // private Boolean isPublic;
-
-    @ManyToOne
-    @JoinColumn(name = "reply_id")
-    private Post post;
-
+    private Boolean isPublic;
+//    @ManyToOne
+//    @JoinColumn(name = "post_id")
+//    private Post post;
 
 }

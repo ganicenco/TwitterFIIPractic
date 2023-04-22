@@ -12,16 +12,17 @@ import ro.itschool.service.AuthenticationService;
 @RequestMapping("/authenticate")
 public class AuthenticationController {
 
-    private final AuthenticationService service;
-
-    @PostMapping("/login")
-    public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
-        return service.authenticate(authenticationRequest);
-    }
+    private final AuthenticationService authenticationService;
 
     @PostMapping("/register")
     public AuthenticationResponse register(@RequestBody RegisterRequest registerRequest) {
-        return service.register(registerRequest);
+        return authenticationService.register(registerRequest);
+    }
+
+    @PostMapping("/login")
+    public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
+        return authenticationService.authenticate(authenticationRequest);
     }
 
 }
+

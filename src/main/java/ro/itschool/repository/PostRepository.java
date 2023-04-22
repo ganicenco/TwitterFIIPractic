@@ -20,7 +20,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Modifying
     @Query(value = "DELETE FROM likes WHERE post_id = ?", nativeQuery = true)
     void deleteLikesByPostId(Long id);
-    // without , 0 AS clazz_ it doesn't run. with it, doesn't get result.
+
     @Query(value = "SELECT *, 0 AS clazz_ FROM post WHERE message LIKE %:keyword%", nativeQuery = true)
     List<Post> getPostsWithMention(String keyword);
 

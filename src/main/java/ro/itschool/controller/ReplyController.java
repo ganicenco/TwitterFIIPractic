@@ -33,7 +33,7 @@ public class ReplyController {
             return new ResponseEntity<>("Post with id:" + postId + " " + "not found", HttpStatus.BAD_REQUEST);
         } else {
             Post post = optionalPost.get();
-            post.setReplays(reply.getReplays());
+           // post.setReplays(reply.getReplays());
             return new ResponseEntity<>(replyService.save(reply), HttpStatus.OK);
         }
     }

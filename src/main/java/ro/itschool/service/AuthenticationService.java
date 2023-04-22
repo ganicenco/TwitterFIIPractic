@@ -9,9 +9,8 @@ import ro.itschool.controller.model.AuthenticationRequest;
 import ro.itschool.controller.model.AuthenticationResponse;
 import ro.itschool.controller.model.RegisterRequest;
 import ro.itschool.entity.MyRole;
-import ro.itschool.entity.RoleName;
+import ro.itschool.enums.RoleName;
 import ro.itschool.entity.User;
-import ro.itschool.exceptions.UserNotFoundException;
 import ro.itschool.repository.RoleRepository;
 import ro.itschool.repository.UserRepository;
 
@@ -45,7 +44,6 @@ public class AuthenticationService {
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-               // request.getEmail(),
                 request.getUsername(),
                 request.getPassword()
         );

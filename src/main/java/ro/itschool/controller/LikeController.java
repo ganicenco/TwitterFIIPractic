@@ -18,7 +18,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class LikeController {
     private final LikesService likesService;
-    private final PostService postService;
 
     @RequestMapping(value = "/like/{postId}")
     public void likePost(@PathVariable Long postId) {

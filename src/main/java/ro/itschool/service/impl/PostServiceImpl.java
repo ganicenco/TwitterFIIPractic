@@ -25,7 +25,10 @@ public class PostServiceImpl implements PostService {
     private final ReplyRepository replyRepository;
 
     public Post save(Post newPost) {
-        newPost.setTimestamp(LocalDateTime.now());
+        newPost.setTimestamp(LocalDate.now());
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+       Optional<User> optionalLoggedInUser = userRepository.findByUsername(principal.getUsername());
+        newPost.setUser(optionalLoggedInUser.get());
         return postRepository.save(newPost);
     }
 
@@ -45,28 +48,6 @@ public class PostServiceImpl implements PostService {
             postRepository.deleteById(id);
         });
     }
-
-
-//    @Override
-//    public List<Post> getPostFromFollowedUsers() {
-//        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        Optional<User> optionalLoggedInUser = userRepository.findByUsername(principal.getUsername());
-//        List<User> users = userRepository.getFollowedUsers(principal.getId())
-//                .stream()
-//                .map(element -> new User(
-//                        element[0].toString(),
-//                        element[1].toString(),
-//                        element[2].toString(),
-//                        element[3].toString(),
-//                        element[4].toString()))
-//                .toList();
-//
-//        return users.stream()
-//                .map(user -> postRepository.findById(user.getId()))
-//                .flatMap(Collection::stream)
-//                .toList();
-//
-//    }
 
 
     @Override

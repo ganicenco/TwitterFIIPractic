@@ -12,15 +12,13 @@ public interface PostService {
 
     Post save(Post newPost);
 
-    //List<Post> getPostFromFollowedUsers();
-
     List<Post> filterPosts(LocalDate timestamp);
 
     void deletePostById(Long id);
 
     void repost(Long id);
 
-   List<Post> getPostWithMentions();
+    List<Post> getPostWithMentions();
 
     Optional<Post> findById(Long postId);
 

@@ -20,33 +20,32 @@ import static jakarta.persistence.CascadeType.ALL;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Post {
     @Id
-    // can no longer use identity key generation, because of inheritance
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "post_id")
     private Long id;
     @Column(nullable = false)
     private String message;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime timestamp;
+    @Temporal(TemporalType.DATE)
+    private LocalDate timestamp;
 
     @ManyToOne
     @JsonBackReference
     private User user;
 
-    @OneToMany //(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = ALL)
     private Set<Likes> likes;
 
-    @OneToMany (mappedBy = "post", cascade = ALL)
-    private Set<Reply> replays = new LinkedHashSet<>();
+    @OneToMany //(mappedBy = "post", cascade = ALL)
+    private Set<Reply> replies = new LinkedHashSet<>();
 
-    @OneToMany// (mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = ALL)
     private Set<Mention> mentions = new LinkedHashSet<>();
 
-    public Post(String message, LocalDateTime timestamp, User user) {
+    public Post(String message, LocalDate timestamp, User user) {
         this.message = message;
         this.timestamp = timestamp;
         this.user = user;

@@ -23,37 +23,24 @@ public class PostController {
     private final UserService userService;
 
     //1. Add post : post a public message
-    //works
-    @PostMapping(value = "/create/{userId}")
-    private ResponseEntity<?> addPost(@RequestBody Post newPost, @PathVariable Long userId) {
-        Optional<User> userOptional = userService.findById(userId);
-        if (userOptional.isEmpty()) {
-            return new ResponseEntity<>("User with id:" + userId + " " + "not found", HttpStatus.BAD_REQUEST);
-        }
-        User user = userOptional.get();
-        newPost.setUser(user);
-        return new ResponseEntity<>(postService.save(newPost), HttpStatus.OK);
+    @PostMapping(value = "/create")
+    private void addPost(@RequestBody Post newPost) {
+        postService.save(newPost);
     }
 
     // 2. Get own posts : return all posts added by the current user;
-    //works
     @GetMapping(value = "/get-own-posts")
-   public void getMyPosts(){
-        postService.getMyPosts();
+    public List<Post> getMyPosts() {
+        return postService.getMyPosts();
     }
+
     // 2'.Able to filter posts newer than a timestamp
-    //works
     @GetMapping(value = "/filter-timestamp")
-    public List<Post> filterPosts(@RequestParam("timestamp") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDate timestamp) {
+    public List<Post> filterPosts(@RequestParam("timestamp") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate timestamp) {
         return postService.filterPosts(timestamp);
     }
 
     //3. Get feed : return all posts added by users followed by the current user
-//
-//         @GetMapping(value = "/feed")
-//        public void getFeed() {
-//        postService.getPostFromFollowedUsers();
-//    }
 
 
     // 4. Delete post and all the likes
@@ -66,16 +53,16 @@ public class PostController {
 
     //5. Repost : “copy” an existing post from a different user
     //works
-    @RequestMapping(value = "/repost/{id}")
+    @PostMapping(value = "/repost/{id}")
     public void repost(@PathVariable Long id) {
         postService.repost(id);
     }
 
-    //    6. Get mentions : return all posts in which the current user was mentioned
-//    nu merge
+    //   6. Get mentions : return all posts in which the current user was mentioned
+    //  doesn't work
     @GetMapping(value = "/mentions")
-    public void getPostWithMentions() {
-        postService.getPostWithMentions();
+    public List<Post> getPostWithMentions() {
+       return postService.getPostWithMentions();
     }
 
 }
