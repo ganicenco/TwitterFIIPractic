@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static jakarta.persistence.CascadeType.ALL;
 
@@ -20,7 +21,6 @@ public class Reply extends Post {
 
     private Boolean isPublic;
 //    @ManyToOne
-//    @JoinColumn(name = "post_id")
+//    @JoinColumn(name = "post2_id")
 //    private Post post;
-
 }

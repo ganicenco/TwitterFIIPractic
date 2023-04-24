@@ -34,13 +34,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(
             value = """
-                    SELECT b.user_id, b.username, b.last_name, b.first_name, b.mail FROM user a INNER JOIN follow
-                    ON a.user_id = follow.follower_id
+                    SELECT b.id, b.username, b.last_name, b.first_name, b.mail FROM user a INNER JOIN follow
+                    ON a.id = follow.follower_id
                     INNER JOIN user b
-                    ON b.user_id = follow.followed_id
-                    WHERE a.user_id = ?;
+                    ON b.id = follow.followed_id
+                    WHERE a.id = ?;
                     """, nativeQuery = true)
-    List<Object[]> getFollowedUsers(Long id);
+    List<User[]> getFollowedUsers(Long id);
 
 
     @Transactional

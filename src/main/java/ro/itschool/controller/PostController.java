@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ro.itschool.entity.Post;
 import ro.itschool.entity.User;
@@ -41,10 +42,13 @@ public class PostController {
     }
 
     //3. Get feed : return all posts added by users followed by the current user
-
+    @GetMapping(value = "/all")
+    public String getAllPosts(Model model) {
+        model.addAttribute("posts", postService.getPostsFromFollowedUsers());
+        return "posts";
+    }
 
     // 4. Delete post and all the likes
-    //works
     @DeleteMapping(value = "/delete/{id}")
     public void deletePost(@PathVariable Long id) {
         postService.deletePostById(id);
@@ -52,14 +56,12 @@ public class PostController {
 
 
     //5. Repost : “copy” an existing post from a different user
-    //works
     @PostMapping(value = "/repost/{id}")
     public void repost(@PathVariable Long id) {
         postService.repost(id);
     }
 
     //   6. Get mentions : return all posts in which the current user was mentioned
-    //  doesn't work
     @GetMapping(value = "/mentions")
     public List<Post> getPostWithMentions() {
        return postService.getPostWithMentions();

@@ -52,16 +52,16 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    //     @Override
-//      public List<User> getFollowedUsers() {
-//          //ce pun in paranteze. parca nu merge nimic
-//          return userRepository.getFollowedUsers()
-//                  .stream()
-//                  .map(elem -> new User(elem[0].toString(), elem[1].toString(), elem[2].toString(), elem[3].toString(), elem[4].toString()))
-//                  .toList();
-//      }, k
-//
-//
+    @Override
+    public List<User> getFollowedUsers() {
+        User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<User> optionalLoggedInUser = userRepository.findByUsername(loggedUser.getUsername());
+        return userRepository.getFollowedUsers(optionalLoggedInUser.get().getId())
+                .stream()
+                .map(elem -> new User(elem[0].toString(), elem[1].toString(), elem[2].toString(), elem[3].toString(), elem[4].toString()))
+                .toList();
+    }
+
 
     @Override
     public void deleteById(Long id) {

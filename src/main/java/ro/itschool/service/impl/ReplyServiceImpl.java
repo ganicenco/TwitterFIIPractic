@@ -18,5 +18,6 @@ public class ReplyServiceImpl implements ReplyService {
     public Reply save(Reply newReply) {
         newReply.setTimestamp(LocalDate.now());
         return replyRepository.save(newReply);
+
     }
 }

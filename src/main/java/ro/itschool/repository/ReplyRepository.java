@@ -14,5 +14,4 @@ public interface ReplyRepository extends JpaRepository<Reply, Long> {
     @Query(value = "DELETE FROM reply WHERE post_id = ?", nativeQuery = true)
     void deleteReplies(Long id);
 
-
 }

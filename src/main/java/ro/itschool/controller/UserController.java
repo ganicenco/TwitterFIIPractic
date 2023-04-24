@@ -41,10 +41,10 @@ public class UserController {
         userService.unfollowUSer(id);
     }
 
-//    @GetMapping(value = "/followed")
-//    public void getFollowedUsers() {
-//        userService.getFollowedUsers();
-//    }
+    @GetMapping(value = "/followed")
+    public void getFollowedUsers() {
+        userService.getFollowedUsers();
+    }
 
     //5. Unregister : remove user and all his posts
     @DeleteMapping(value = "/delete/{id}")

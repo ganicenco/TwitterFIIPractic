@@ -20,7 +20,7 @@ import static jakarta.persistence.CascadeType.ALL;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -39,7 +39,7 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = ALL)
     private Set<Likes> likes;
 
-    @OneToMany //(mappedBy = "post", cascade = ALL)
+    @OneToMany(cascade = ALL)
     private Set<Reply> replies = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "post", cascade = ALL)
@@ -50,4 +50,5 @@ public class Post {
         this.timestamp = timestamp;
         this.user = user;
     }
+
 }

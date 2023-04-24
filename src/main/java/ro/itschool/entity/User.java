@@ -47,7 +47,7 @@ public class User implements UserDetails {
     @JsonManagedReference
     private Set<Post> posts = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany//(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Mention> mentions = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

@@ -23,4 +23,6 @@ public interface PostService {
     Optional<Post> findById(Long postId);
 
     List<Post> getMyPosts();
+
+    Object getPostsFromFollowedUsers();
 }

@@ -19,7 +19,7 @@ public interface UserService {
     void unfollowUSer(Long id);
 
 
-    //List<User> getFollowedUsers();
+    List<User> getFollowedUsers();
 
     void deleteById(Long id);
 
