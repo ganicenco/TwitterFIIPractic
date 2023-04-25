@@ -28,10 +28,10 @@ public class SecurityConfiguration {
                 .requestMatchers(
                         "/authenticate/login",
                         "/authenticate/register",
-                        "/users/**",
-                        "/post/**",
-                        "/reply/**",
-                        "/likes/**",
+                      //  "/users/**",
+                       // "/post/**",
+                      //  "/reply/**",
+                      //  "/likes/**",
                         "/swagger-ui/**",
                         "/v3/api-docs/**"
                 )

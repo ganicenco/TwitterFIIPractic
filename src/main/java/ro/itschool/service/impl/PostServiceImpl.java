@@ -83,10 +83,10 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Object getPostsFromFollowedUsers() {
+    public List<Post> getPostsFromFollowedUsers() {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> optionalLoggedInUser = userRepository.findById(principal.getId());
-        List<User> springUsers = userRepository.getFollowedUsers(optionalLoggedInUser.get().getId())
+        List<User> users = userRepository.getFollowedUsers(optionalLoggedInUser.get().getId())
                 .stream()
                 .map(elem -> new User(
                         elem[0].toString(),
@@ -95,7 +95,7 @@ public class PostServiceImpl implements PostService {
                         elem[3].toString(),
                         elem[4].toString()))
                 .toList();
-        return springUsers.stream()
+        return users.stream()
                 .map(user -> postRepository.findByUserId(user.getId()))
                 .flatMap(Collection::stream)
                 .toList();

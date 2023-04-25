@@ -43,9 +43,8 @@ public class PostController {
 
     //3. Get feed : return all posts added by users followed by the current user
     @GetMapping(value = "/all")
-    public String getAllPosts(Model model) {
-        model.addAttribute("posts", postService.getPostsFromFollowedUsers());
-        return "posts";
+    public List<Post> getAllPosts() {
+      return postService.getPostsFromFollowedUsers();
     }
 
     // 4. Delete post and all the likes

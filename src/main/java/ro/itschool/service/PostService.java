@@ -24,5 +24,5 @@ public interface PostService {
 
     List<Post> getMyPosts();
 
-    Object getPostsFromFollowedUsers();
+    List<Post> getPostsFromFollowedUsers();
 }

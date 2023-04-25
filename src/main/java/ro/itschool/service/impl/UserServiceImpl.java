@@ -15,7 +15,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final PostRepository postRepository;
 
     @Override
     public List<User> searchUser(String keyword) {
@@ -30,11 +29,13 @@ public class UserServiceImpl implements UserService {
         userRepository.findById(user.getId());
     }
 
+
+    @Override
     public void followUser(Long followedId) {
         //cautam userul pe care dorim sa-l urmarim
         Optional<User> toBeFollowed = userRepository.findById(followedId);
         //identificam userul logat
-        User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+       User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> optionalLoggedInUser = userRepository.findByUsername(loggedUser.getUsername());
         //inseram in DB leatura dintre follow si followed
         toBeFollowed.ifPresent(user -> userRepository.insertIntoFollowTable(optionalLoggedInUser.get().getId(), user.getId()));
@@ -54,14 +55,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getFollowedUsers() {
-        User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Optional<User> optionalLoggedInUser = userRepository.findByUsername(loggedUser.getUsername());
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<User> optionalLoggedInUser = userRepository.findByUsername(principal.getUsername());
         return userRepository.getFollowedUsers(optionalLoggedInUser.get().getId())
                 .stream()
                 .map(elem -> new User(elem[0].toString(), elem[1].toString(), elem[2].toString(), elem[3].toString(), elem[4].toString()))
                 .toList();
     }
-
 
     @Override
     public void deleteById(Long id) {

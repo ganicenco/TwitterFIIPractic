@@ -34,7 +34,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(
             value = """
-                    SELECT b.id, b.username, b.last_name, b.first_name, b.mail FROM user a INNER JOIN follow
+                    SELECT b.id, b.first_name, b.last_name, b.username, b.email FROM user a INNER JOIN follow
                     ON a.id = follow.follower_id
                     INNER JOIN user b
                     ON b.id = follow.followed_id
