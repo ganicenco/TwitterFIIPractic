@@ -1,6 +1,7 @@
 package ro.itschool.service;
 
 import org.springframework.stereotype.Service;
+import ro.itschool.controller.modelDTO.UserDTO;
 import ro.itschool.entity.User;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Optional;
 public interface UserService {
     List<User> searchUser(String keyword);
 
-    void getUser(User user);
+    List<UserDTO> getUser(User user);
 
     //  Optional<User> findByName(String name);
 
@@ -23,11 +24,11 @@ public interface UserService {
 
     void deleteById(Long id);
 
-    Optional<User> findById(Long userId);
+    List<UserDTO> findById(Long userId);
 
     void saveUsersToWorkWith(User user);
 
-    List<User> findAll();
+    List<UserDTO> findAll();
 
     void save(User user);
 

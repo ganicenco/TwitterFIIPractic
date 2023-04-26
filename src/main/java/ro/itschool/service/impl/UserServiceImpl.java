@@ -4,10 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import ro.itschool.controller.modelDTO.UserDTO;
 import ro.itschool.entity.MyRole;
 import ro.itschool.entity.User;
 import ro.itschool.enums.RoleName;
-import ro.itschool.repository.PostRepository;
+import ro.itschool.mapper.UserMapper;
 import ro.itschool.repository.RoleRepository;
 import ro.itschool.repository.UserRepository;
 import ro.itschool.service.UserService;
@@ -22,6 +23,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
+    private final UserMapper userMapper;
 
     @Override
     public List<User> searchUser(String keyword) {
@@ -32,8 +34,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void getUser(User user) {
-        userRepository.findById(user.getId());
+    public List<UserDTO> getUser(User user) {
+         return userRepository.findById(user.getId()).stream()
+                .map(userMapper::fromEntity)
+                .toList();
     }
 
 
@@ -80,8 +84,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findById(Long userId) {
-        return userRepository.findById(userId);
+    public List<UserDTO> findById(Long userId) {
+        return userRepository.findById(userId).stream()
+                .map(userMapper::fromEntity)
+                .toList();
     }
 
     @Override
@@ -93,8 +99,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<UserDTO> findAll() {
+        return userRepository.findAll().stream()
+                .map(userMapper::fromEntity)
+                .toList();
     }
 
     @Override

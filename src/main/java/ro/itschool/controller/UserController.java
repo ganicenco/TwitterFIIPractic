@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ro.itschool.controller.modelDTO.UserDTO;
 import ro.itschool.entity.User;
 import ro.itschool.service.UserService;
 
@@ -17,7 +18,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping(path = "/all")
-    public List<User> getAllUsers() {
+    public List<UserDTO> getAllUsers() {
         return userService.findAll();
     }
 

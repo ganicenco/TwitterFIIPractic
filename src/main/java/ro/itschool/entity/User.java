@@ -69,12 +69,19 @@ public class User implements UserDetails {
     private Set<MyRole> roles = new HashSet<>();
 
 
-    public User(String id, String firstName, String lastName, String username, String email){
+    public User(String id, String firstName, String lastName, String username, String email) {
         this.id = Long.valueOf(id);
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.email = email;
+    }
+
+    public User(String firstName, String lastName, String email, Set<MyRole> roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.roles = roles;
     }
 
 
