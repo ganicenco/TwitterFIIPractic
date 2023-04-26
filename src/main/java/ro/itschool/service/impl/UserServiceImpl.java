@@ -26,11 +26,13 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
 
     @Override
-    public List<User> searchUser(String keyword) {
+    public List<UserDTO> searchUser(String keyword) {
         if (keyword == null) {
             keyword = "";
         }
-        return userRepository.searchUserBy(keyword);
+        return userRepository.searchUserBy(keyword).stream()
+                .map(userMapper::fromEntity)
+                .toList();
     }
 
     @Override
@@ -65,12 +67,15 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<User> getFollowedUsers() {
+    public List<UserDTO> getFollowedUsers() {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> optionalLoggedInUser = userRepository.findByUsername(principal.getUsername());
         return userRepository.getFollowedUsers(optionalLoggedInUser.get().getId())
                 .stream()
                 .map(elem -> new User(elem[0].toString(), elem[1].toString(), elem[2].toString(), elem[3].toString(), elem[4].toString()))
+                .toList()
+                .stream()
+                .map(userMapper::fromEntity)
                 .toList();
     }
 

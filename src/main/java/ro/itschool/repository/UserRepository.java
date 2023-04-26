@@ -15,6 +15,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByUsername(String username);
+
     @Query(
             value = "SELECT * FROM user u WHERE u.username LIKE %:keyword% OR u.first_name LIKE %:keyword% " +
                     "OR u.last_name LIKE %:keyword%",
@@ -32,22 +33,20 @@ public interface UserRepository extends JpaRepository<User, Long> {
     void deleteFromFollowTable(@Param("followerId") Long followerId, @Param("followedId") Long followedId);
 
 
-    @Query(
-            value = """
-                    SELECT b.id, b.first_name, b.last_name, b.username, b.email FROM user a INNER JOIN follow
-                    ON a.id = follow.follower_id
-                    INNER JOIN user b
-                    ON b.id = follow.followed_id
-                    WHERE a.id = ?;
-                    """, nativeQuery = true)
-    List<User[]> getFollowedUsers(Long id);
+    @Query(value = """
+            SELECT b.id, b.first_name, b.last_name, b.username, b.email FROM user a INNER JOIN follow
+            ON a.id = follow.follower_id
+            INNER JOIN user b
+            ON b.id = follow.followed_id
+            WHERE a.id = ?;
+            """, nativeQuery = true)
+    List<Object[]> getFollowedUsers(Long id);
 
 
     @Transactional
     @Modifying
     @Query(value = "DELETE FROM follow WHERE follower_id = ?", nativeQuery = true)
     void deleteFollower(Long id);
-
 
 
 }

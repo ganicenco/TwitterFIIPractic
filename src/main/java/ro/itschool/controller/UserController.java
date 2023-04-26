@@ -25,7 +25,7 @@ public class UserController {
 
     //2. Search : search for other users by username, firstname or lastname
     @GetMapping(path = "/search")
-    public List<User> searchUser(@RequestParam String keyword) {
+    public List<UserDTO> searchUser(@RequestParam String keyword) {
         return userService.searchUser(keyword);
     }
 
@@ -43,8 +43,8 @@ public class UserController {
     }
 
     @GetMapping(value = "/followed")
-    public void getFollowedUsers() {
-        userService.getFollowedUsers();
+    public List<UserDTO> getFollowedUsers() {
+       return userService.getFollowedUsers();
     }
 
     //5. Unregister : remove user and all his posts

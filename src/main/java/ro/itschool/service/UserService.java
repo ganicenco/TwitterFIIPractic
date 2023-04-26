@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Service
 public interface UserService {
-    List<User> searchUser(String keyword);
+    List<UserDTO> searchUser(String keyword);
 
     List<UserDTO> getUser(User user);
 
@@ -20,7 +20,7 @@ public interface UserService {
     void unfollowUSer(Long id);
 
 
-    List<User> getFollowedUsers();
+    List<UserDTO> getFollowedUsers();
 
     void deleteById(Long id);
 
