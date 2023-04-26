@@ -2,19 +2,26 @@ package ro.itschool.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import ro.itschool.entity.MyRole;
 import ro.itschool.entity.User;
+import ro.itschool.enums.RoleName;
 import ro.itschool.repository.PostRepository;
+import ro.itschool.repository.RoleRepository;
 import ro.itschool.repository.UserRepository;
 import ro.itschool.service.UserService;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final RoleRepository roleRepository;
 
     @Override
     public List<User> searchUser(String keyword) {
@@ -35,7 +42,7 @@ public class UserServiceImpl implements UserService {
         //cautam userul pe care dorim sa-l urmarim
         Optional<User> toBeFollowed = userRepository.findById(followedId);
         //identificam userul logat
-       User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> optionalLoggedInUser = userRepository.findByUsername(loggedUser.getUsername());
         //inseram in DB leatura dintre follow si followed
         toBeFollowed.ifPresent(user -> userRepository.insertIntoFollowTable(optionalLoggedInUser.get().getId(), user.getId()));
@@ -78,7 +85,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerNewUser(User user) {
+    public void saveUsersToWorkWith(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        MyRole userRole = roleRepository.findByName(RoleName.ROLE_USER);
+        user.setRoles(Set.of(userRole));
         userRepository.save(user);
     }
 

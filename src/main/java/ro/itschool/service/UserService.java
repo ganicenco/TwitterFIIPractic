@@ -25,7 +25,7 @@ public interface UserService {
 
     Optional<User> findById(Long userId);
 
-    void registerNewUser(User user);
+    void saveUsersToWorkWith(User user);
 
     List<User> findAll();
 

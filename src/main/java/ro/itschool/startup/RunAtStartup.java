@@ -38,9 +38,7 @@ public class RunAtStartup {
                 new Post("this is a test post 2", LocalDate.now(), user1),
                 new Post("this is a test post 3", LocalDate.now(), user1));
         user1.setPosts(posts);
-        userService.save(user1);
-        postRepository.saveAll(posts);
-        userService.registerNewUser(user1);
+        userService.saveUsersToWorkWith(user1);
 
         User user2 = new User();
         user2.setFirstName("Loredana");
@@ -52,9 +50,7 @@ public class RunAtStartup {
                 new Post("yet another test post", LocalDate.now(), user2),
                 new Post("post 3 of user 2", LocalDate.now(), user2));
         user2.setPosts(posts1);
-        userService.save(user2);
-        postRepository.saveAll(posts1);
-        userService.registerNewUser(user2);
+        userService.saveUsersToWorkWith(user2);
 
         User user3 = new User();
         user3.setFirstName("Pavel");
@@ -66,8 +62,6 @@ public class RunAtStartup {
                 new Post("test 2 for user3", LocalDate.now(), user3),
                 new Post("the last post for user 3", LocalDate.now(), user3));
         user3.setPosts(posts3);
-        userService.save(user3);
-        postRepository.saveAll(posts3);
-        userService.registerNewUser(user3);
+        userService.saveUsersToWorkWith(user3);
     }
 }
