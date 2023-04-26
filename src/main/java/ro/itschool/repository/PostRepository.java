@@ -13,7 +13,6 @@ import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
-
     List<Post> findByTimestampGreaterThan(@Param("timestamp") LocalDate timestamp);
 
     @Transactional

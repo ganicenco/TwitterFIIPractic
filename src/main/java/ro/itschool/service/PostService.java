@@ -2,6 +2,7 @@ package ro.itschool.service;
 
 import org.springframework.stereotype.Service;
 import ro.itschool.entity.Post;
+import ro.itschool.entity.Reply;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -25,4 +26,5 @@ public interface PostService {
     List<Post> getMyPosts();
 
     List<Post> getPostsFromFollowedUsers();
+
 }
