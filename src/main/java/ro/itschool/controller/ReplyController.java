@@ -28,7 +28,6 @@ public class ReplyController {
     //1. Add post reply : reply to existing posts or other replies. Able to specify if the reply
     //is public or only for the parent post’s owner
 
-
     @PostMapping(value = "/add/{postId}")
     public void addReply(@PathVariable Long postId, @RequestBody Reply reply) {
         replyService.addReplyToPost(postId, reply);

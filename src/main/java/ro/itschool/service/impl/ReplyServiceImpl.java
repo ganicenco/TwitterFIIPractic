@@ -27,18 +27,15 @@ public class ReplyServiceImpl implements ReplyService {
     public void addReplyToPost(Long postId, Reply reply) {
         User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> optionalLoggedInUser = userRepository.findByUsername(loggedUser.getUsername());
-        User whoReplies = optionalLoggedInUser.get();
 
         Optional<Post> optionalPost = postRepository.findById(postId);
-        Post postToBeReplied = optionalPost.get();
 
-        reply.setTimestamp(LocalDate.now());
-        reply.setUser(whoReplies);
+        reply.setTimestamp(LocalDateTime.now());
+        reply.setUser(optionalLoggedInUser.get());
 
-        Set<Reply> replies = postToBeReplied.getReplies();
+        Set<Reply> replies = optionalPost.get().getReplies();
         replies.add(reply);
-        postToBeReplied.setReplies(replies);
-        //reply.setPost(post);
+        optionalPost.get().setReplies(replies);
         replyRepository.save(reply);
 
     }

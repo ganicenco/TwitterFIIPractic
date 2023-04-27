@@ -29,8 +29,8 @@ public class Post {
     @Column(nullable = false)
     private String message;
 
-    @Temporal(TemporalType.DATE)
-    private LocalDate timestamp;
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime timestamp;
 
     @ManyToOne
     @JsonBackReference
@@ -45,7 +45,7 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = ALL)
     private Set<Mention> mentions = new LinkedHashSet<>();
 
-    public Post(String message, LocalDate timestamp, User user) {
+    public Post(String message, LocalDateTime timestamp, User user) {
         this.message = message;
         this.timestamp = timestamp;
         this.user = user;

@@ -5,6 +5,7 @@ import ro.itschool.entity.Post;
 import ro.itschool.entity.Reply;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,7 +14,7 @@ public interface PostService {
 
     Post save(Post newPost);
 
-    List<Post> filterPosts(LocalDate timestamp);
+    List<Post> filterPosts(LocalDateTime timestamp);
 
     void deletePostById(Long id);
 

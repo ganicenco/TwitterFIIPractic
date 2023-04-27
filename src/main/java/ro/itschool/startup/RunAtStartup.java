@@ -14,6 +14,7 @@ import ro.itschool.service.UserService;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Component
@@ -34,9 +35,9 @@ public class RunAtStartup {
         user1.setUsername("ioanam");
         user1.setEmail("ioana.mocanu@gmail.com");
         user1.setPassword("pass");
-        Set<Post> posts = Set.of(new Post("this is a test post 1", LocalDate.now(), user1),
-                new Post("this is a test post 2", LocalDate.now(), user1),
-                new Post("this is a test post 3", LocalDate.now(), user1));
+        Set<Post> posts = Set.of(new Post("this is a test post 1", LocalDateTime.now(), user1),
+                new Post("this is a test post 2", LocalDateTime.now(), user1),
+                new Post("this is a test post 3", LocalDateTime.now(), user1));
         user1.setPosts(posts);
         userService.saveUsersToWorkWith(user1);
 
@@ -46,9 +47,9 @@ public class RunAtStartup {
         user2.setUsername("loredanac");
         user2.setEmail("loredana.chiriac@gmail.com");
         user2.setPassword("pass");
-        Set<Post> posts1 = Set.of(new Post("this is another test post", LocalDate.now(), user2),
-                new Post("yet another test post", LocalDate.now(), user2),
-                new Post("post 3 of user 2", LocalDate.now(), user2));
+        Set<Post> posts1 = Set.of(new Post("this is another test post", LocalDateTime.now(), user2),
+                new Post("yet another test post", LocalDateTime.now(), user2),
+                new Post("post 3 of user 2", LocalDateTime.now(), user2));
         user2.setPosts(posts1);
         userService.saveUsersToWorkWith(user2);
 
@@ -58,9 +59,9 @@ public class RunAtStartup {
         user3.setUsername("paveld");
         user3.setEmail("pavel.dimitrie@gmail.com");
         user3.setPassword("pass");
-        Set<Post> posts3 = Set.of(new Post("Test post 3", LocalDate.now(), user3),
-                new Post("test 2 for user3", LocalDate.now(), user3),
-                new Post("the last post for user 3", LocalDate.now(), user3));
+        Set<Post> posts3 = Set.of(new Post("Test post 3", LocalDateTime.now(), user3),
+                new Post("test 2 for user3", LocalDateTime.now(), user3),
+                new Post("the last post for user 3", LocalDateTime.now(), user3));
         user3.setPosts(posts3);
         userService.saveUsersToWorkWith(user3);
     }

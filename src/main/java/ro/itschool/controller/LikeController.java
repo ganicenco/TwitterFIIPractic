@@ -19,13 +19,13 @@ import java.util.Optional;
 public class LikeController {
     private final LikesService likesService;
 
-    @RequestMapping(value = "/like/{postId}")
+    @PostMapping(value = "/like/{postId}")
     public void likePost(@PathVariable Long postId) {
         likesService.likePost(postId);
 
     }
 
-    @RequestMapping(value = "/unlike/{id}")
+    @DeleteMapping(value = "/unlike/{id}")
     public void unlikePost(@PathVariable Long id) {
         likesService.unlikePost(id);
 

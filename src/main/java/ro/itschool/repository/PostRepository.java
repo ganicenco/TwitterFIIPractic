@@ -9,11 +9,12 @@ import org.springframework.stereotype.Repository;
 import ro.itschool.entity.Post;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
-    List<Post> findByTimestampGreaterThan(@Param("timestamp") LocalDate timestamp);
+    List<Post> findByTimestampAfter(/*@Param("timestamp") */ LocalDateTime timestamp);
 
     @Transactional
     @Modifying

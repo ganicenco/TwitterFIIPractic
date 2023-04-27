@@ -13,6 +13,7 @@ import ro.itschool.service.PostService;
 import ro.itschool.service.UserService;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +22,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
-    private final UserService userService;
 
     //1. Add post : post a public message
     @PostMapping(value = "/create")
@@ -37,7 +37,7 @@ public class PostController {
 
     // 2'.Able to filter posts newer than a timestamp
     @GetMapping(value = "/filter-timestamp")
-    public List<Post> filterPosts(@RequestParam("timestamp") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate timestamp) {
+    public List<Post> filterPosts(@RequestParam("timestamp") LocalDateTime timestamp) {
         return postService.filterPosts(timestamp);
     }
 

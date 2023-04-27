@@ -13,6 +13,7 @@ import ro.itschool.service.PostService;
 import ro.itschool.service.UserService;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +26,7 @@ public class PostServiceImpl implements PostService {
     private final ReplyRepository replyRepository;
 
     public Post save(Post newPost) {
-        newPost.setTimestamp(LocalDate.now());
+        newPost.setTimestamp(LocalDateTime.now());
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> optionalLoggedInUser = userRepository.findByUsername(principal.getUsername());
         newPost.setUser(optionalLoggedInUser.get());
@@ -33,8 +34,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> filterPosts(LocalDate timestamp) {
-        return postRepository.findByTimestampGreaterThan(timestamp);
+    public List<Post> filterPosts(LocalDateTime timestamp) {
+        return postRepository.findByTimestampAfter(timestamp);
     }
 
     @Override
