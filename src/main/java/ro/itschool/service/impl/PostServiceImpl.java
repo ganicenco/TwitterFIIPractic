@@ -12,6 +12,7 @@ import ro.itschool.repository.UserRepository;
 import ro.itschool.service.PostService;
 import ro.itschool.service.UserService;
 
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -71,10 +72,10 @@ public class PostServiceImpl implements PostService {
     }
 
 
-    @Override
-    public Optional<Post> findById(Long postId) {
-        return postRepository.findById(postId);
-    }
+//    @Override
+//    public Optional<Post> findById(Long postId) {
+//        return postRepository.findById(postId);
+//    }
 
     @Override
     public List<Post> getMyPosts() {
@@ -102,6 +103,5 @@ public class PostServiceImpl implements PostService {
                 .toList();
     }
 }
-
 
 

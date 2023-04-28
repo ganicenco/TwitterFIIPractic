@@ -14,7 +14,7 @@ import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
-    List<Post> findByTimestampAfter(/*@Param("timestamp") */ LocalDateTime timestamp);
+    List<Post> findByTimestampAfter(LocalDateTime timestamp);
 
     @Transactional
     @Modifying

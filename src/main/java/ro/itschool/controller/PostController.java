@@ -12,6 +12,7 @@ import ro.itschool.exceptions.UserNotFoundException;
 import ro.itschool.service.PostService;
 import ro.itschool.service.UserService;
 
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;

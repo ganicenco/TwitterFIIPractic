@@ -1,9 +1,11 @@
 package ro.itschool.service;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.stereotype.Service;
 import ro.itschool.entity.Post;
 import ro.itschool.entity.Reply;
 
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,10 +24,11 @@ public interface PostService {
 
     List<Post> getPostWithMentions();
 
-    Optional<Post> findById(Long postId);
+  //  Optional<Post> findById(Long postId);
 
     List<Post> getMyPosts();
 
     List<Post> getPostsFromFollowedUsers();
+
 
 }

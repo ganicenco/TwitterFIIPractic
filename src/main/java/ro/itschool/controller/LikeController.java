@@ -22,7 +22,6 @@ public class LikeController {
     @PostMapping(value = "/like/{postId}")
     public void likePost(@PathVariable Long postId) {
         likesService.likePost(postId);
-
     }
 
     @DeleteMapping(value = "/unlike/{id}")

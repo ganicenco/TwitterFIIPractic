@@ -35,12 +35,12 @@ public class UserServiceImpl implements UserService {
                 .toList();
     }
 
-    @Override
-    public List<UserDTO> getUser(User user) {
-         return userRepository.findById(user.getId()).stream()
-                .map(userMapper::fromEntity)
-                .toList();
-    }
+//    @Override
+//    public List<UserDTO> getUser(User user) {
+//         return userRepository.findById(user.getId()).stream()
+//                .map(userMapper::fromEntity)
+//                .toList();
+//    }
 
 
     @Override
@@ -88,12 +88,12 @@ public class UserServiceImpl implements UserService {
         });
     }
 
-    @Override
-    public List<UserDTO> findById(Long userId) {
-        return userRepository.findById(userId).stream()
-                .map(userMapper::fromEntity)
-                .toList();
-    }
+//    @Override
+//    public List<UserDTO> findById(Long userId) {
+//        return userRepository.findById(userId).stream()
+//                .map(userMapper::fromEntity)
+//                .toList();
+//    }
 
     @Override
     public void saveUsersToWorkWith(User user) {
@@ -108,11 +108,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll().stream()
                 .map(userMapper::fromEntity)
                 .toList();
-    }
-
-    @Override
-    public void save(User user) {
-        userRepository.save(user);
     }
 
 }

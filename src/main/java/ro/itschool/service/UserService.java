@@ -11,9 +11,7 @@ import java.util.Optional;
 public interface UserService {
     List<UserDTO> searchUser(String keyword);
 
-    List<UserDTO> getUser(User user);
-
-    //  Optional<User> findByName(String name);
+  //  List<UserDTO> getUser(User user);
 
     void followUser(Long followedId);
 
@@ -24,12 +22,11 @@ public interface UserService {
 
     void deleteById(Long id);
 
-    List<UserDTO> findById(Long userId);
+ //   List<UserDTO> findById(Long userId);
 
     void saveUsersToWorkWith(User user);
 
     List<UserDTO> findAll();
 
-    void save(User user);
 
 }

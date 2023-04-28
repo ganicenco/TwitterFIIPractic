@@ -21,7 +21,6 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class RunAtStartup {
     private final UserService userService;
-    private final PostRepository postRepository;
     private final RoleRepository roleRepository;
 
     @EventListener(ApplicationReadyEvent.class)
